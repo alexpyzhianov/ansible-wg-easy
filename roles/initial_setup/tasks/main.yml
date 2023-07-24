@@ -1,0 +1,59 @@
+---
+- name: Create a new non-root user and add to sudoers
+  user:
+    name: "{{ username }}"
+    shell: /bin/bash
+    groups: sudo
+    password: "{{ hashed_password }}"
+    append: yes
+    state: present
+  become: yes
+
+- name: Copy SSH key
+  authorized_key:
+    user: "{{ username }}"
+    state: present
+    key: "{{ lookup('file', public_key_path) }}"
+
+- name: Update all packages
+  apt:
+    upgrade: dist
+    update_cache: yes
+  become: yes
+
+- name: Install UFW
+  apt:
+    name: ufw
+    state: present
+  become: yes
+
+- name: Allow SSH connections through firewall
+  ufw:
+    rule: allow
+    name: OpenSSH
+  become: yes
+
+- name: Enable firewall
+  ufw:
+    state: enabled
+  become: yes
+
+- name: Disable root login
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin no"
+  become: yes
+
+- name: Disable password logins
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^#?PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+  become: yes
+
+- name: Restart SSH
+  service:
+    name: ssh
+    state: restarted
+  become: yes

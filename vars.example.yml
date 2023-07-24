@@ -1,0 +1,4 @@
+---
+username: some_user
+public_key_path: ~/.ssh/id_rsa.pub
+hashed_password: "$6$X9Z3Z3Z3Z3Z3Z3Z3$"
