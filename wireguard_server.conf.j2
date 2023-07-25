@@ -1,27 +1,7 @@
 [Interface]
-Address = 10.0.0.1/24
-ListenPort = 51820
-PrivateKey = {{ wg_server_private_key.stdout }}
+Address = 10.8.0.1/32
+ListenPort = {{ server_port }}
+PrivateKey = {{ server_private_key }}
 SaveConfig = true
-PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ interface.stdout }} -j MASQUERADE
-PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ interface.stdout }} -j MASQUERADE
-
-[Peer]
-PublicKey = {{ client1_public_key }}
-AllowedIPs = 10.0.0.2/32
-
-[Peer]
-PublicKey = {{ client2_public_key }}
-AllowedIPs = 10.0.0.3/32
-
-[Peer]
-PublicKey = {{ client3_public_key }}
-AllowedIPs = 10.0.0.4/32
-
-[Peer]
-PublicKey = {{ client4_public_key }}
-AllowedIPs = 10.0.0.5/32
-
-[Peer]
-PublicKey = {{ client5_public_key }}
-AllowedIPs = 10.0.0.6/32
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ iface }} -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ iface }} -j MASQUERADE

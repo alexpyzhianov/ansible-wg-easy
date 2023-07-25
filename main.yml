@@ -8,5 +8,7 @@
       tags: initial_setup
     - role: unattended_updates
       tags: unattended_updates
-    - role: wireguard
+    - role: wireguard_setup
+      tags: wireguard
+    - role: wireguard_launch
       tags: wireguard
