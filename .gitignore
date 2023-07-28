@@ -1,4 +1,3 @@
 become_pass
 hosts.ini
 vars.yml
-cmd.sh

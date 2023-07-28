@@ -1,13 +1,5 @@
 ---
-wg_port: 51820
-username: some_user
 public_key_path: ~/.ssh/id_rsa.pub
+username: some_user
 hashed_password: "$6$X9Z3Z3Z3Z3Z3Z3Z3$"
-clients:
-  - name: mobile
-    index: 0
-    ip: '10.8.0.10'
-  - name: laptop
-    index: 1
-    ip: '10.8.0.11'
-    
+wg_easy_password: "some_password"

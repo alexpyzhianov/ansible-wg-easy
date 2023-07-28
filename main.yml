@@ -5,10 +5,10 @@
     - vars.yml
   roles:
     - role: initial_setup
-      tags: initial_setup
+      tags: setup
     - role: unattended_updates
-      tags: unattended_updates
-    - role: wireguard_setup
-      tags: wireguard
-    - role: wireguard_launch
-      tags: wireguard
+      tags: setup
+    - role: docker
+      tags: docker
+    - role: wireguard
+      tags: wg

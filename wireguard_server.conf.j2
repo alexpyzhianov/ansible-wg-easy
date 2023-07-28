@@ -1,7 +1,0 @@
-[Interface]
-Address = 10.8.0.1/32
-ListenPort = {{ server_port }}
-PrivateKey = {{ server_private_key }}
-SaveConfig = true
-PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ iface }} -j MASQUERADE
-PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ iface }} -j MASQUERADE
